@@ -545,7 +545,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // Badge
    
-        Positioned(
+         Consumer<CartController>(
+          builder: (_, cart, __) {
+          if (cart.totalCount == 0) return const SizedBox.shrink();
+       return Positioned(
           top: -2, 
           right: -2, 
           child: Container(
@@ -557,10 +560,7 @@ class _HomeScreenState extends State<HomeScreen> {
               shape: BoxShape.circle,
             ),
             child: Center(       
-              child:  Consumer<CartController>(
-               builder: (_, cart, __) {
-                   if (cart.totalCount == 0) return const SizedBox.shrink();
-              return Text(
+              child: Text(
                ' ${cart.totalCount}',
                 style: const TextStyle(
                   fontSize: 10,
@@ -569,13 +569,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 11/ 20, 
                 ),
                 textAlign: TextAlign.center,
-              );},)
+              ),
             ),
           ),
-        ),
-      ],
+        );
+      }),
+    ],
    )
-                 );
+  );
   }
 }
 
