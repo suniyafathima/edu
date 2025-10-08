@@ -215,30 +215,37 @@ Future<void> pickAndUploadImage(BuildContext context) async {
       toggleLoading(false);
     }
   }
-
-
 Future<void> fetchUserData() async {
   final token = await TokenStorage.getToken();
-  if (token == null) return;
+  if (token == null) {
+    log('No token found');
+    return;
+  }
 
   toggleLoading(true);
-
   try {
     final userData = await EduApiServices.getUserData(token: token);
+
     if (userData != null) {
+      // EduApiServices.getUserData() already returns user map
       fullName = userData['fullname'] ?? '';
       fullnameController.text = fullName!;
-      emailList = [userData['email'] ?? ''];
-      email = emailList.first;
+      email = userData['email'] ?? '';
+      emailList = [email ?? ''];
       profilePictureUrl = userData['picture'];
       notifyListeners();
+      log('User data fetched successfully: $fullName, $email');
+    } else {
+      log('No valid user data received');
     }
   } catch (e) {
-    log('❌ Exception in fetchUserData: $e');
+    log('Exception in fetchUserData: $e');
   } finally {
     toggleLoading(false);
   }
 }
+
+
 void updateFullName(String val) {
   fullName = val;
   fullnameController.text = val;

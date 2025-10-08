@@ -1,5 +1,6 @@
 import 'package:edu/controller/auth_controller.dart';
 import 'package:edu/global_widget/gradientButton.dart';
+import 'package:edu/view/login_profile/login_profile.dart';
 import 'package:edu/view/name_screen/namescreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ import 'package:provider/provider.dart';
 
 class VerificationScreen extends StatelessWidget {
    final String email;
-  const VerificationScreen({super.key,required this.email});
+   final bool isSignup;
+  const VerificationScreen({super.key,required this.email,required this.isSignup,});
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +126,21 @@ class VerificationScreen extends StatelessWidget {
                   onPressed: () async {
                     final response = await authController.verifyOtp(context);
                     if (response != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Namescreen(),
-                        ),
-                      );
+                       if (isSignup) {
+                                // Navigate to NameScreen for signup
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>  Namescreen()),
+                                );
+                              } else {
+                                // Navigate to LoginProfile for login
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const LoginProfile()),
+                                );
+                              }
                     }
                    },
                 ),

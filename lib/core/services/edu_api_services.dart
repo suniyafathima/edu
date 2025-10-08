@@ -99,13 +99,14 @@ static Future<Map<String, dynamic>?> getUserData({required String token}) async 
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      // data['user'] contains user info
-      return data['user'] != null ? Map<String, dynamic>.from(data['user']) : null;
+      return data['user'] != null
+          ? Map<String, dynamic>.from(data['user'])
+          : null;
     } else {
       log('Error fetching user: ${response.statusCode} - ${response.body}');
     }
   } catch (e) {
-    log(' Exception in getUserData: $e');
+    log('Exception in getUserData: $e');
   }
   return null;
 }

@@ -170,6 +170,7 @@ return Scaffold(
                           MaterialPageRoute(
                             builder: (_) => VerificationScreen(
                               email: authController.emailController.text,
+                              isSignup: true,
                             ),
                           ),
                         );

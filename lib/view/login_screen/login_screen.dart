@@ -1,8 +1,8 @@
 import 'package:edu/controller/auth_controller.dart';
 import 'package:edu/global_widget/gradientButton.dart';
 import 'package:edu/global_widget/social_button.dart';
-import 'package:edu/view/login_profile/login_profile.dart';
 import 'package:edu/view/signup_screen/signup_screen.dart';
+import 'package:edu/view/verification_screen/verification_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -225,29 +225,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
         const SizedBox(height: 24),
 
-        GradientButton(
-          text: "Continue",
-          onPressed: () async {
-            final authController = Provider.of<AuthController>(context, listen: false);
-            await authController.fetchUserData();
+    GradientButton(
+  text: "Continue",
+  onPressed: () async {
+    final email = emailController.text.trim();
 
-            if (authController.fullName == null || authController.email == null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Failed to fetch user data. Please log in again.')),
-              );
-              return;
-            }
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your email')),
+      );
+      return;
+    }
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => LoginProfile(),
-              ),
-            );
-          },
+    final authController = Provider.of<AuthController>(context, listen: false);
+    authController.emailController.text = email; // Set the controller
+
+    final response = await authController.sendOtp(context);
+
+    if (response != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => VerificationScreen(
+            email: email,
+            isSignup: false,
+          ),
         ),
-         const SizedBox(height: 32),
-          // Dont have account,Register
+      );
+    }
+  },
+),
+
+    const SizedBox(height: 32),
+    // Dont have account,Register
     SizedBox(
       width: 327,
       height: 20,

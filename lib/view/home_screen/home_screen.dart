@@ -408,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: controller.subjects.length,
               separatorBuilder: (context, index) => const SizedBox(width: 12), 
               itemBuilder: (context, index) {
-          final subject = controller.subjects[index];
+          final subjectss = controller.subjects[index];
           return Container(
             width: 159, 
             height: 80, 
@@ -417,8 +417,8 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius: BorderRadius.circular(14),
               gradient: LinearGradient(
                  colors: [
-                  Color(int.parse(subject.mainColor!.replaceFirst('#', '0xff'))),
-                  Color(int.parse(subject.gradientColor!.replaceFirst('#', '0xff'))),
+                  Color(int.parse(subjectss.mainColor!.replaceFirst('#', '0xff'))),
+                  Color(int.parse(subjectss.gradientColor!.replaceFirst('#', '0xff'))),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -430,12 +430,22 @@ class _HomeScreenState extends State<HomeScreen> {
                  SizedBox(
                    width: 32, 
                    height: 32,
-                   child: Image.network(subject.icon ?? '',fit: BoxFit.cover),
+                   child:Image.network( subjectss.icon ?? '',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey,
+                          size: 40,
+                        );
+                      },
+                    ),
+
                    ),
                 const SizedBox(height: 14), 
                 Expanded(
                   child: Text(
-                     subject.subject ?? '',
+                     subjectss.subject ?? '',
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
