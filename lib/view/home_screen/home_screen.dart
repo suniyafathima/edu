@@ -143,7 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
                    // Notification Bell
-            buildnotification(),
+            buildNotification(),
+          
             const SizedBox(width: 10),
                   // Cart
             buildCartBadge(context),
@@ -277,6 +278,29 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
    );
  }
+
+  Container buildNotification() {
+    return Container(
+  width: 40,
+  height: 40,
+  padding: const EdgeInsets.all(10),
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    border: Border.all(
+      color:  const Color(0xFFCBD5E1),
+      width: 1,
+    ),
+  ),
+  child: Center(
+    child: Icon(
+      Icons.notifications_none_rounded,
+      size: 20,
+      color: const Color(0xFF0F172A),
+      weight: 1.5, // ensures stroke consistency
+    ),
+  ),
+         );
+  }
 
 
   SizedBox buildBuyMaterial(MaterialsController materialController) {
@@ -555,35 +579,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class buildnotification extends StatelessWidget {
-  const buildnotification({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-    width: 40,
-    height: 40,
-    padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      border: Border.all(
-        color:  const Color(0xFFCBD5E1),
-        width: 1,
-      ),
-    ),
-    child: Center(
-      child: Icon(
-        Icons.notifications_none_rounded,
-        size: 20,
-        color: const Color(0xFF0F172A),
-        weight: 1.5, // ensures stroke consistency
-      ),
-    ),
-           );
-  }
-}
 
 void showCartBottomSheet(BuildContext context) {
  showModalBottomSheet(

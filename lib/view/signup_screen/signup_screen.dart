@@ -159,7 +159,7 @@ return Scaffold(
               SizedBox(height: 20,),
               
                authController.isLoading
-                ? const CircularProgressIndicator()
+                ? Center(child: const CircularProgressIndicator())
                 :GradientButton(
                 text: "Continue",
                onPressed: () async {
