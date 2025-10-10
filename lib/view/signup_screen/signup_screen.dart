@@ -110,7 +110,7 @@ return Scaffold(
             style: GoogleFonts.inter(
               fontSize: 14,
               fontWeight: FontWeight.w400,
-              height: 20 / 14, // line-height / font-size
+              height: 20 / 14,
               color: const Color(0xFF64748B),
             ),
             decoration: InputDecoration(

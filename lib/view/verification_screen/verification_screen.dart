@@ -15,14 +15,9 @@ class VerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_){
-         final controller = AuthController();
-        controller.emailController.text= email;
-        return controller;
-      },
-      child: Consumer<AuthController>(
-          builder: (context, authController, _){
+    
+    final authController = context.watch<AuthController>();
+    authController.emailController.text = email;
         return Scaffold(
           backgroundColor: Colors.white,
           body: Padding(
@@ -180,8 +175,7 @@ class VerificationScreen extends StatelessWidget {
             ),
           ),
         );
-        },
-      ),
-    );
+        
+        }
+  
   }
-}
