@@ -17,6 +17,14 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  
+  @override
+void initState() {
+  super.initState();
+  final authController = context.read<AuthController>();
+  authController.emailController.clear(); // clear last email
+}
+
   @override
   Widget build(BuildContext context) {
 final authController = context.watch<AuthController>();

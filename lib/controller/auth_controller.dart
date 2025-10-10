@@ -248,7 +248,6 @@ Future<void> fetchUserData() async {
 
 void updateFullName(String val) {
   fullName = val;
-  fullnameController.text = val;
   notifyListeners();
 }
 void updateEmail(String val) {
@@ -263,6 +262,7 @@ void updateEmail(String val) {
   @override
   void dispose() {
     emailController.dispose();
+    fullnameController.dispose();
     otpController.dispose();
     super.dispose();
   }

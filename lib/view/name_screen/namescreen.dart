@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Namescreen extends StatelessWidget {
-  Namescreen({super.key});
-  final TextEditingController fullnameController = TextEditingController();
+  const Namescreen({super.key});
+ 
   @override
   Widget build(BuildContext context) {
      final authController = context.watch<AuthController>();
@@ -82,7 +82,7 @@ class Namescreen extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child:TextField(
-                controller: fullnameController,
+                controller: authController.fullnameController,
                   style: GoogleFonts.inter(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -131,7 +131,7 @@ class Namescreen extends StatelessWidget {
   }
    Future<void> _handleContinue(
       BuildContext context, AuthController authController) async {
-    final name = fullnameController.text.trim();
+    final name = authController.fullnameController.text.trim();
 
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -140,10 +140,6 @@ class Namescreen extends StatelessWidget {
       return;
     }
 
-    // Update AuthController
-    authController.fullnameController.text = name;
-
-    // Call API to save name
     await authController.addFullName(context);
 
   }

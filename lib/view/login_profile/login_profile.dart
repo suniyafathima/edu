@@ -39,7 +39,6 @@ class _LoginProfileState extends State<LoginProfile> {
   @override
   Widget build(BuildContext context) {
     final authController = context.watch<AuthController>();
-    fullnameController.text = authController.fullName ?? '';
     selectedEmail = authController.email;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -225,7 +224,7 @@ class _LoginProfileState extends State<LoginProfile> {
                     style: GoogleFonts.inter(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      height: 1.0, // important for vertical centering
+                      height: 1.0, 
                       color: const Color(0xFF64748B),
                     ),
                   ),
@@ -233,7 +232,7 @@ class _LoginProfileState extends State<LoginProfile> {
               }).toList(),
               decoration: InputDecoration(
                 isDense: true,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), // center vertically
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10), 
                 hintText: 'fetchedemailid@gmail.com',
                 hintStyle: GoogleFonts.inter(
                   fontSize: 14,

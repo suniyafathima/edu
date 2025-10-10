@@ -129,6 +129,7 @@ class VerificationScreen extends StatelessWidget {
                                       builder: (_) =>  Namescreen()),
                                 );
                               } else {
+                                await authController.fetchUserData();
                                 // Navigate to LoginProfile for login
                                 Navigator.pushReplacement(
                                   context,
